@@ -5,9 +5,9 @@
  * ways the child can run up the stairs.
  *
  * Runtimes:
- *  - Brute force recursion O(n^3)
- *  - Memoized recursion    O(n)
- *  - Bottom-up iteration   O(n)
+ *  - Brute force recursion: O(n^3)
+ *  - Memoized recursion:    O(n)
+ *  - Bottom-up iteration:   O(n)
 */
 
 export const stairsRecursion = (N) => {

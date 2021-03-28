@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Data structures & Algorithms playground & implementations",
   "scripts": {
-    "test": "node --expose-gc ./node_modules/jest/bin/jest --runInBand --logHeapUsage --detectOpenHandles"
+    "test:dp": "node --expose-gc ./node_modules/jest/bin/jest --runInBand --logHeapUsage --detectOpenHandles --testPathPattern='test/unit/dp'"
   },
   "author": "wan",
   "license": "MIT",
