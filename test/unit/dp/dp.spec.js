@@ -1,6 +1,7 @@
 import * as Stairs from '../../../src/dp/stairs';
 import * as Robot from '../../../src/dp/robot';
 import * as MagicIndex from '../../../src/dp/magicindex';
+import * as PowerSet from '../../../src/dp/powerset';
 
 describe('DP general challenges', () => {
   it('Correctly solves the problem: Stairs', () => {
@@ -215,6 +216,78 @@ describe('DP general challenges', () => {
 
       const resultF = magicRecursion(testArrayF); // Invalid
       expect(resultF).toBe(-1);
+    }
+  });
+
+  it('Correctly solves the problem: Power set', () => {
+    // Empty set
+    const testArrayA = [];
+
+    // 2 set
+    const testArrayB = [1];
+
+    // 4 set
+    const testArrayC = [1, 2];
+
+    // 8 set
+    const testArrayD = [1, 2, 3];
+
+    // Recursive set building
+    const { powerRecursion } = PowerSet;
+    expect(typeof powerRecursion).toBe('function');
+
+    {
+      const resultA = powerRecursion(testArrayA); // length: 1
+      expect(resultA).toEqual([[]]);
+
+      const resultB = powerRecursion(testArrayB); // length: 2
+      expect(resultB).toEqual([[], [1]]);
+
+      const resultC = powerRecursion(testArrayC); // length: 4
+      expect(resultC).toEqual([[], [1], [1, 2], [2]]);
+
+      const resultD = powerRecursion(testArrayD); // length: 8
+      expect(resultD).toEqual([[], [1], [1, 2], [1, 2, 3], [1, 3], [2], [2, 3], [3]]);
+    }
+
+    // Iterative set building
+    const { powerIteration } = PowerSet;
+    expect(typeof powerIteration).toBe('function');
+
+    {
+      const resultA = powerIteration(testArrayA); // length: 1
+      expect(resultA).toEqual([[]]);
+
+      const resultB = powerIteration(testArrayB); // length: 2
+      expect(resultB).toEqual([[], [1]]);
+
+      const resultC = powerIteration(testArrayC); // length: 4
+      expect(resultC).toEqual([[], [1], [2], [1, 2]]);
+
+      const resultD = powerIteration(testArrayD); // length: 8
+      expect(resultD).toEqual(
+        [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]],
+      );
+    }
+
+    // Functional iterative set building
+    const { powerFunctional } = PowerSet;
+    expect(typeof powerFunctional).toBe('function');
+
+    {
+      const resultA = powerFunctional(testArrayA); // length: 1
+      expect(resultA).toEqual([[]]);
+
+      const resultB = powerFunctional(testArrayB); // length: 2
+      expect(resultB).toEqual([[], [1]]);
+
+      const resultC = powerFunctional(testArrayC); // length: 4
+      expect(resultC).toEqual([[], [1], [2], [1, 2]]);
+
+      const resultD = powerFunctional(testArrayD); // length: 8
+      expect(resultD).toEqual(
+        [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]],
+      );
     }
   });
 });
