@@ -1,5 +1,6 @@
 import * as Stairs from '../../../src/dp/stairs';
 import * as Robot from '../../../src/dp/robot';
+import * as MagicIndex from '../../../src/dp/magicindex';
 
 describe('DP general challenges', () => {
   it('Correctly solves the problem: Stairs', () => {
@@ -16,11 +17,11 @@ describe('DP general challenges', () => {
     ]);
 
     // DP, recursion with memoization
-    const { stairsMemoized } = Stairs;
-    expect(typeof stairsMemoized).toBe('function');
+    const { stairsMemoization } = Stairs;
+    expect(typeof stairsMemoization).toBe('function');
 
     const memoizedResults = Array.from(
-      { length: 11 }, (_, i) => stairsMemoized(i),
+      { length: 11 }, (_, i) => stairsMemoization(i),
     );
 
     expect(memoizedResults).toEqual([
@@ -28,11 +29,11 @@ describe('DP general challenges', () => {
     ]);
 
     // Bottom-up DP, iterative memoization
-    const { stairsIterative } = Stairs;
-    expect(typeof stairsIterative).toBe('function');
+    const { stairsIteration } = Stairs;
+    expect(typeof stairsIteration).toBe('function');
 
     const iterativeResults = Array.from(
-      { length: 11 }, (_, i) => stairsIterative(i),
+      { length: 11 }, (_, i) => stairsIteration(i),
     );
 
     expect(iterativeResults).toEqual([
@@ -122,30 +123,98 @@ describe('DP general challenges', () => {
     }
 
     // DP, recursion with memoization
-    const { robotMemoized } = Robot;
-    expect(typeof robotMemoized).toBe('function');
+    const { robotMemoization } = Robot;
+    expect(typeof robotMemoization).toBe('function');
 
     {
-      const resultA = robotMemoized(testMazeA); // Valid
+      const resultA = robotMemoization(testMazeA); // Valid
       expect(resultA).not.toBe(null);
 
-      const resultB = robotMemoized(testMazeB); // Valid
+      const resultB = robotMemoization(testMazeB); // Valid
       expect(resultB).not.toBe(null);
 
-      const resultC = robotMemoized(testMazeC); // Valid
+      const resultC = robotMemoization(testMazeC); // Valid
       expect(resultC).not.toBe(null);
 
-      const resultD = robotMemoized(testMazeD); // Valid
+      const resultD = robotMemoization(testMazeD); // Valid
       expect(resultD).not.toBe(null);
 
-      const resultE = robotMemoized(testMazeE); // Invalid
+      const resultE = robotMemoization(testMazeE); // Invalid
       expect(resultE).toBe(null);
 
-      const resultF = robotMemoized(testMazeF); // Invalid
+      const resultF = robotMemoization(testMazeF); // Invalid
       expect(resultF).toBe(null);
 
-      const resultG = robotMemoized(testMazeG); // Invalid
+      const resultG = robotMemoization(testMazeG); // Invalid
       expect(resultG).toBe(null);
+    }
+  });
+
+  it('Correctly solves the problem: Magic index', () => {
+    // A[4] === 4
+    const testArrayA = [1, 2, 3, 4, 4, 5, 6, 8, 10];
+
+    // A[5] === 5
+    const testArrayB = [-5, -3, -1, 1, 3, 5, 7, 9, 11];
+
+    // A[10] === 10
+    const testArrayC = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
+
+    // No match
+    const testArrayD = [-7, 5, 11, 13, 15, 18, 21, 100];
+
+    // No match
+    const testArrayE = [-1, 0, 1];
+
+    // No match
+    const testArrayF = [];
+
+    // Iterative, naive
+    const { magicIteration } = MagicIndex;
+    expect(typeof magicIteration).toBe('function');
+
+    {
+      const resultA = magicIteration(testArrayA); // Valid
+      expect(resultA).toBe(4);
+
+      const resultB = magicIteration(testArrayB); // Valid
+      expect(resultB).toBe(5);
+
+      const resultC = magicIteration(testArrayC); // Valid
+      expect(resultC).toBe(10);
+
+      const resultD = magicIteration(testArrayD); // Invalid
+      expect(resultD).toBe(-1);
+
+      const resultE = magicIteration(testArrayE); // Invalid
+      expect(resultE).toBe(-1);
+
+      const resultF = magicIteration(testArrayF); // Invalid
+      expect(resultF).toBe(-1);
+    }
+
+    // Recursion, binary search
+    const { magicRecursion } = MagicIndex;
+    expect(typeof magicRecursion).toBe('function');
+
+    {
+      const resultA = magicRecursion(testArrayA); // Valid
+      expect(resultA).toBe(4);
+
+      const resultB = magicRecursion(testArrayB); // Valid
+      expect(resultB).toBe(5);
+
+      const resultC = magicRecursion(testArrayC); // Valid
+      expect(resultC).toBe(10);
+
+      const resultD = magicRecursion(testArrayD); // Invalid
+      expect(resultD).toBe(-1);
+
+      const resultE = magicRecursion(testArrayE); // Invalid
+      expect(resultE).toBe(-1);
+
+      const resultF = magicRecursion(testArrayF); // Invalid
+      expect(resultF).toBe(-1);
     }
   });
 });

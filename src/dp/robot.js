@@ -52,7 +52,7 @@ export const robotRecursion = (grid) => {
     : null;
 };
 
-export const robotMemoized = (grid) => {
+export const robotMemoization = (grid) => {
   if (!grid || !grid.length) return null;
 
   const gridWidth = grid[0].length - 1;

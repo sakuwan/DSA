@@ -18,7 +18,7 @@ export const stairsRecursion = (N) => {
   return stairsRecursion(N - 1) + stairsRecursion(N - 2) + stairsRecursion(N - 3);
 };
 
-export const stairsMemoized = (N) => {
+export const stairsMemoization = (N) => {
   const dp = Array.from({
     0: 1, 1: 1, 2: 2, 3: 4, length: N + 1,
   }, (x) => x ?? 0);
@@ -34,7 +34,7 @@ export const stairsMemoized = (N) => {
   return countSteps(N);
 };
 
-export const stairsIterative = (N) => {
+export const stairsIteration = (N) => {
   const dp = Array.from({
     0: 1, 1: 1, 2: 2, 3: 4, length: N + 1,
   }, (x) => x ?? 0);
