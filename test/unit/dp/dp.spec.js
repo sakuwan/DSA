@@ -2,6 +2,7 @@ import * as Stairs from '../../../src/dp/stairs';
 import * as Robot from '../../../src/dp/robot';
 import * as MagicIndex from '../../../src/dp/magicindex';
 import * as PowerSet from '../../../src/dp/powerset';
+import * as Median from '../../../src/dp/median';
 
 describe('DP general challenges', () => {
   it('Correctly solves the problem: Stairs', () => {
@@ -288,6 +289,74 @@ describe('DP general challenges', () => {
       expect(resultD).toEqual(
         [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]],
       );
+    }
+  });
+
+  it('Correctly solves the problem: Median', () => {
+    // [1, 2, 3, 4, 5, 6] -> 3.5
+    const testArrayA = [[1, 2, 3], [4, 5, 6]];
+
+    // [-5, 0, 5, 10, 15, 20] -> 7.5
+    const testArrayB = [[-5, 15, 20], [0, 5, 10]];
+
+    // [0, 0, 1, 2] -> 0.5
+    const testArrayC = [[0, 1, 2], [0]];
+
+    // [1, 2, 3, 4] -> 2.5
+    const testArrayD = [[1, 2], [3, 4]];
+
+    // [0, 0] -> 0
+    const testArrayE = [[0], [0]];
+
+    // [] -> null
+    const testArrayF = [[], []];
+
+    // Median of sorted arrays, merging
+    const { medianMerge } = Median;
+    expect(typeof medianMerge).toBe('function');
+
+    {
+      const resultA = medianMerge(...testArrayA); // 3.5
+      expect(resultA).toBe(3.5);
+
+      const resultB = medianMerge(...testArrayB); // 7.5
+      expect(resultB).toBe(7.5);
+
+      const resultC = medianMerge(...testArrayC); // 0.5
+      expect(resultC).toBe(0.5);
+
+      const resultD = medianMerge(...testArrayD); // 2.5
+      expect(resultD).toBe(2.5);
+
+      const resultE = medianMerge(...testArrayE); // 0
+      expect(resultE).toBe(0);
+
+      const resultF = medianMerge(...testArrayF); // null
+      expect(resultF).toBe(null);
+    }
+
+    // Median of sorted arrays, iterative
+    const { medianIteration } = Median;
+    expect(typeof medianIteration).toBe('function');
+
+    {
+      const resultA = medianIteration(...testArrayA); // 3.5
+      expect(resultA).toBe(3.5);
+
+      const resultB = medianIteration(...testArrayB); // 7.5
+      expect(resultB).toBe(7.5);
+
+      const resultC = medianIteration(...testArrayC); // 0.5
+      expect(resultC).toBe(0.5);
+
+      const resultD = medianIteration(...testArrayD); // 2.5
+      expect(resultD).toBe(2.5);
+
+      const resultE = medianIteration(...testArrayE); // 0
+      expect(resultE).toBe(0);
+
+      const resultF = medianIteration(...testArrayF); // null
+      expect(resultF).toBe(null);
     }
   });
 });
