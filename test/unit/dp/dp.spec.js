@@ -3,6 +3,7 @@ import * as Robot from '../../../src/dp/robot';
 import * as MagicIndex from '../../../src/dp/magicindex';
 import * as PowerSet from '../../../src/dp/powerset';
 import * as Median from '../../../src/dp/median';
+import * as Hanoi from '../../../src/dp/hanoi';
 
 describe('DP general challenges', () => {
   it('Correctly solves the problem: Stairs', () => {
@@ -358,5 +359,26 @@ describe('DP general challenges', () => {
       const resultF = medianIteration(...testArrayF); // null
       expect(resultF).toBe(null);
     }
+  });
+
+  it('Correctly solves the problem: Towers of Hanoi', () => {
+    // Towers of Hanoi, recursive
+    const { hanoiRecursion } = Hanoi;
+    expect(typeof hanoiRecursion).toBe('function');
+
+    const invalidResult = hanoiRecursion(0);
+    expect(invalidResult).toBe(null);
+
+    const resultA = hanoiRecursion(1); // 1 step
+    expect(resultA.steps.length).toBe(1);
+
+    const resultB = hanoiRecursion(2); // 3 step
+    expect(resultB.steps.length).toBe(3);
+
+    const resultC = hanoiRecursion(3); // 7 step
+    expect(resultC.steps.length).toBe(7);
+
+    const resultD = hanoiRecursion(4); // 15 step
+    expect(resultD.steps.length).toBe(15);
   });
 });
