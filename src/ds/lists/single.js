@@ -7,10 +7,12 @@
  * Runtimes:
  *  - constructor: O(n)
  *  - add:         O(1)
- *  - insert:      O(n)
+ *  - insert:      O(n) expected, O(1) first element
  *  - remove:      O(n) expected, O(1) first element
  *  - push:        O(1)
  *  - pop:         O(n)
+ *  - shift:       O(1)
+ *  - unshift:     O(1)
  *  - append:      O(n)
  *  - get:         O(n) expected, O(1) first / last element
  *  - set:         O(n) expected, O(1) first / last element
@@ -145,6 +147,27 @@ export class SinglyLinkedList {
 
     return value;
   }
+
+  shift() {
+    if (!this.size) {
+      throw new ReferenceError('List has no elements');
+    }
+
+    const { value } = this.head;
+
+    if (this.size === 1) {
+      this.clear();
+
+      return value;
+    }
+
+    this.head = this.head.next;
+    this.size -= 1;
+
+    return value;
+  }
+
+  unshift(value) { return this.insert(0, value); }
 
   append(collection) {
     Array.from(collection, (x) => this.add(x));

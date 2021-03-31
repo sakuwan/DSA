@@ -1,4 +1,5 @@
 import { SinglyLinkedList } from '../../../src/ds/lists/single';
+import { BinarySearchTree } from '../../../src/ds/trees/binary';
 
 describe('Data structures: Singly-linked list', () => {
   it('Properly constructs from collections', () => {
@@ -119,12 +120,38 @@ describe('Data structures: Singly-linked list', () => {
     expect(testListA.size).toBe(5);
     expect(testListA.head.next.next.next.next).not.toBe(null);
     expect(testListA.head.next.next.next.next.next).toBe(null);
+    expect(testListA.tail.next).toBe(null);
+    expect(testListA.tail.value).toBe(5);
 
     // Empty list
     const testListB = new SinglyLinkedList([]);
 
     // Invalid call, expect ReferenceError
     expect(() => testListB.pop()).toThrowError(ReferenceError);
+  });
+
+  it('Performs shift and unshift', () => {
+    // From array, 1 -> 2 -> 3 -> 4 -> 5 -> null
+    const testListA = new SinglyLinkedList([1, 2, 3, 4, 5]);
+
+    // Unshift is an alias of insert(0, value), refer to prior test
+    // Insert new head, (0) -> [0, 1, 2, 3, 4, 5]
+    testListA.unshift(0);
+    expect(testListA.head.value).toBe(0);
+    expect(testListA.size).toBe(6);
+
+    // Remove head node, return value (0) -> [1, 2, 3, 4, 5]
+    const headValue = testListA.shift();
+    expect(headValue).toBe(0);
+    expect(testListA.size).toBe(5);
+    expect(testListA.head.next.next.next.next).not.toBe(null);
+    expect(testListA.head.next.next.next.next.next).toBe(null);
+
+    // Empty list
+    const testListB = new SinglyLinkedList([]);
+
+    // Invalid call, expect ReferenceError
+    expect(() => testListB.shift()).toThrowError(ReferenceError);
   });
 
   it('Performs append', () => {
@@ -320,5 +347,175 @@ describe('Data structures: Singly-linked list', () => {
     // Expect empty array
     const emptyArray = [...testListB];
     expect(emptyArray.length).toBe(0);
+  });
+});
+
+describe('Data structures: Binary search tree', () => {
+  it('Properly constructs', () => {
+    // Empty tree
+    const testTree = new BinarySearchTree();
+    expect(testTree).toBeInstanceOf(BinarySearchTree);
+    expect(testTree.root).toBe(null);
+    expect(testTree.size).toBe(0);
+  });
+
+  it('Performs insert', () => {
+    // Empty tree
+    const testTree = new BinarySearchTree();
+
+    /* Insert 10
+          10
+      null  null
+    */
+    testTree.insert(10);
+    expect(testTree.root).not.toBe(null);
+    expect(testTree.root.value).toBe(10);
+    expect(testTree.size).toBe(1);
+
+    /* Insert 15
+          10
+      null  15
+    */
+    testTree.insert(15);
+    expect(testTree.root.right).not.toBe(null);
+    expect(testTree.root.right.value).toBe(15);
+    expect(testTree.root.left).toBe(null);
+    expect(testTree.size).toBe(2);
+
+    /* Insert 5
+          10
+        5   15
+    */
+    testTree.insert(5);
+    expect(testTree.root.left).not.toBe(null);
+    expect(testTree.root.left.value).toBe(5);
+    expect(testTree.size).toBe(3);
+
+    /* Insert 10
+          10 (2)
+        5   15
+    */
+    testTree.insert(10);
+    expect(testTree.root.count).toBe(2);
+    expect(testTree.size).toBe(4);
+
+    /* Insert 7.5
+          10
+        5   15
+         7.5
+    */
+    testTree.insert(7.5);
+    expect(testTree.root.left.right).not.toBe(null);
+    expect(testTree.root.left.right.value).toBe(7.5);
+    expect(testTree.size).toBe(5);
+  });
+
+  it('Performs delete', () => {
+    // Empty tree
+    const testTreeA = new BinarySearchTree();
+
+    /*
+          10
+      5       15
+    */
+    testTreeA.insert(10).insert(15).insert(5);
+
+    // Remove right-most node, no children
+    testTreeA.delete(15);
+    expect(testTreeA.root.right).toBe(null);
+    expect(testTreeA.size).toBe(2);
+
+    // Remove left-most node, no children
+    testTreeA.delete(5);
+    expect(testTreeA.root.left).toBe(null);
+    expect(testTreeA.size).toBe(1);
+
+    /* Rebuild tree with children
+          10
+      5          15
+       7.5 | 12.5
+    */
+    testTreeA.insert(15).insert(5).insert(7.5).insert(12.5);
+
+    // Remove node with right child
+    testTreeA.delete(7.5);
+    expect(testTreeA.root.left.right).toBe(null);
+    expect(testTreeA.size).toBe(4);
+
+    // Remove node with left child
+    testTreeA.delete(12.5);
+    expect(testTreeA.root.right.left).toBe(null);
+    expect(testTreeA.size).toBe(3);
+
+    /* Rebuild tree with children
+          10
+       5          15
+    2.5 7.5 | 12.5  17.5
+    */
+    testTreeA.insert(7.5).insert(12.5).insert(2.5).insert(17.5);
+
+    // Remove left node with children
+    testTreeA.delete(5);
+    expect(testTreeA.root.left.value).toBe(7.5);
+    expect(testTreeA.root.left.right).toBe(null);
+    expect(testTreeA.root.left.left.value).toBe(2.5);
+    expect(testTreeA.size).toBe(6);
+
+    // Remove right node with children
+    testTreeA.delete(15);
+    expect(testTreeA.root.right.value).toBe(17.5);
+    expect(testTreeA.root.right.right).toBe(null);
+    expect(testTreeA.root.right.left.value).toBe(12.5);
+    expect(testTreeA.size).toBe(5);
+
+    // Remove root element
+    testTreeA.delete(10);
+    expect(testTreeA.root.value).toBe(17.5);
+    expect(testTreeA.root.right).toBe(null);
+    expect(testTreeA.root.left.value).toBe(12.5);
+    expect(testTreeA.root.left.left.value).toBe(7.5);
+    expect(testTreeA.root.left.left.left.value).toBe(2.5);
+    expect(testTreeA.size).toBe(4);
+
+    // Expect true on found
+    const wasFound = testTreeA.delete(17.5);
+    expect(wasFound).toBe(true);
+
+    // Expect false on not found
+    const notFound = testTreeA.delete(10);
+    expect(notFound).toBe(false);
+
+    // Empty tree
+    const testTreeB = new BinarySearchTree();
+
+    // Expect false on empty tree
+    const falseOnEmpty = testTreeB.delete(1);
+    expect(falseOnEmpty).toBe(false);
+  });
+
+  it('Performs search', () => {
+    // Empty tree
+    const testTreeA = new BinarySearchTree();
+
+    /*
+          10
+      5       15
+    */
+    testTreeA.insert(10).insert(15).insert(5);
+
+    // Expect true on found
+    const wasFound = testTreeA.search(10);
+    expect(wasFound).toBe(true);
+
+    // Expect false on not found
+    const notFound = testTreeA.search(1);
+    expect(notFound).toBe(false);
+
+    // Empty tree
+    const testTreeB = new BinarySearchTree();
+
+    // Expect false on empty tree
+    const falseOnEmpty = testTreeB.search(1);
+    expect(falseOnEmpty).toBe(false);
   });
 });
