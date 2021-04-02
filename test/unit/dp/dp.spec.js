@@ -5,6 +5,8 @@ import * as PowerSet from '../../../src/dp/powerset';
 import * as Median from '../../../src/dp/median';
 import * as Hanoi from '../../../src/dp/hanoi';
 
+import * as MaxSubarray from '../../../src/dp/maximum';
+
 describe('DP general challenges', () => {
   it('Correctly solves the problem: Stairs', () => {
     // Recursion, no memoization
@@ -380,5 +382,17 @@ describe('DP general challenges', () => {
 
     const resultD = hanoiRecursion(4); // 15 step
     expect(resultD.steps.length).toBe(15);
+  });
+
+  it.only('Correctly solves the problem: Maximum sum subarray', () => {
+    const { maxSubarray } = MaxSubarray;
+    expect(typeof maxSubarray).toBe('function');
+
+    // [1, 1, 1, -1, -1, 3] is the longest subsequence, sum of 4
+    const testArrayA = [2, -3, 1, 1, 1, -1, -1, 3, -1, 0];
+
+    const resultA = maxSubarray(testArrayA);
+    expect(resultA.value).toBe(4);
+    expect(resultA.indices).toStrictEqual([2, 7]);
   });
 });
