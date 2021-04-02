@@ -22,8 +22,6 @@ export const maxSubarray = (A) => {
     endValue += A[--startIndex]; // eslint-disable-line no-plusplus
   }
 
-  console.log(startIndex, endIndex);
-
   return {
     value: maximumValue,
     indices: [startIndex, endIndex],
