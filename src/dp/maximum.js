@@ -9,10 +9,9 @@
 
 // eslint-disable-next-line import/prefer-default-export
 export const maxSubarray = (A) => {
-  if (!A) return null;
+  if (!A || !A.length) return null;
 
   const { length } = A;
-  if (!length) return null;
   if (length === 1) return { value: A[0], indices: [0, 0] };
 
   const dp = Array.from({ length }, (_, i) => ((i === 0) ? A[i] : 0));

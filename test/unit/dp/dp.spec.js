@@ -7,6 +7,7 @@ import * as Hanoi from '../../../src/dp/hanoi';
 import * as MaxSubarray from '../../../src/dp/maximum';
 import * as FirstUnique from '../../../src/dp/firstunique';
 import * as FourSum from '../../../src/dp/foursum';
+import * as FizzBuzz from '../../../src/dp/fizzbuzz';
 
 describe('DP general challenges', () => {
   it('Correctly solves the problem: Stairs', () => {
@@ -509,5 +510,20 @@ describe('DP general challenges', () => {
       const resultC = fourSumMemoization(...testArraysetC); // 0 valid
       expect(resultC).toBe(0);
     }
+  });
+
+  it('Correctly solves the problem: FizzBuzz', () => {
+    // FizzBuzz, iterative
+    const { fizzBuzzIteration } = FizzBuzz;
+    expect(typeof fizzBuzzIteration).toBe('function');
+
+    // The single test of N = 100
+    const result = fizzBuzzIteration(100);
+    expect(result.length).toBe(100); // 100 entries
+
+    expect(result[0]).toBe('1'); // 1
+    expect(result[2]).toBe('Fizz'); // 3
+    expect(result[4]).toBe('Buzz'); // 5
+    expect(result[14]).toBe('FizzBuzz'); // 15
   });
 });
