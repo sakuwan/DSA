@@ -4,8 +4,8 @@ import * as MagicIndex from '../../../src/dp/magicindex';
 import * as PowerSet from '../../../src/dp/powerset';
 import * as Median from '../../../src/dp/median';
 import * as Hanoi from '../../../src/dp/hanoi';
-
 import * as MaxSubarray from '../../../src/dp/maximum';
+import * as FirstUnique from '../../../src/dp/firstunique';
 
 describe('DP general challenges', () => {
   it('Correctly solves the problem: Stairs', () => {
@@ -385,27 +385,87 @@ describe('DP general challenges', () => {
   });
 
   it('Correctly solves the problem: Maximum sum subarray', () => {
-    const { maxSubarray } = MaxSubarray;
-    expect(typeof maxSubarray).toBe('function');
-
     // [1, 1, 1, -1, -1, 3] is the longest subsequence, sum of 4
     const testArrayA = [2, -3, 1, 1, 1, -1, -1, 3, -1, 0];
+
+    // [1] is the longest subsequence, sum of 1
+    const testArrayB = [1];
+
+    // Empty array
+    const testArrayC = [];
+
+    // Maximum sum subarray, iterative
+    const { maxSubarray } = MaxSubarray;
+    expect(typeof maxSubarray).toBe('function');
 
     const resultA = maxSubarray(testArrayA);
     expect(resultA.value).toBe(4);
     expect(resultA.indices).toStrictEqual([2, 7]);
 
-    // [1] is the longest subsequence, sum of 1
-    const testArrayB = [1];
-
     const resultB = maxSubarray(testArrayB);
     expect(resultB.value).toBe(1);
     expect(resultB.indices).toStrictEqual([0, 0]);
 
-    // Empty array
-    const testArrayC = [];
-
     const resultC = maxSubarray(testArrayC);
     expect(resultC).toBe(null);
+  });
+
+  it('Correctly solves the problem: First unique character in a string', () => {
+    // Palindrome, g is unique
+    const testStringA = 'abcdefgfedcba';
+
+    // Final character is unique, g
+    const testStringB = 'aabbccddeeffg';
+
+    // First character is unique, a
+    const testStringC = 'abbccddeeffgg';
+
+    // No unique characters
+    const testStringD = 'aabbccddeeffgg';
+
+    // Empty string
+    const testStringE = '';
+
+    // First unique character, iterative
+    const { firstUniqueIteration } = FirstUnique;
+    expect(typeof firstUniqueIteration).toBe('function');
+
+    {
+      const resultA = firstUniqueIteration(testStringA); // Index 6
+      expect(resultA).toBe(6);
+
+      const resultB = firstUniqueIteration(testStringB); // Index 12
+      expect(resultB).toBe(12);
+
+      const resultC = firstUniqueIteration(testStringC); // Index 0
+      expect(resultC).toBe(0);
+
+      const resultD = firstUniqueIteration(testStringD); // Index -1
+      expect(resultD).toBe(-1);
+
+      const resultE = firstUniqueIteration(testStringE); // Index -1
+      expect(resultE).toBe(-1);
+    }
+
+    // First unique character, functional
+    const { firstUniqueFunctional } = FirstUnique;
+    expect(typeof firstUniqueFunctional).toBe('function');
+
+    {
+      const resultA = firstUniqueIteration(testStringA); // Index 6
+      expect(resultA).toBe(6);
+
+      const resultB = firstUniqueIteration(testStringB); // Index 12
+      expect(resultB).toBe(12);
+
+      const resultC = firstUniqueIteration(testStringC); // Index 0
+      expect(resultC).toBe(0);
+
+      const resultD = firstUniqueIteration(testStringD); // Index -1
+      expect(resultD).toBe(-1);
+
+      const resultE = firstUniqueIteration(testStringE); // Index -1
+      expect(resultE).toBe(-1);
+    }
   });
 });
