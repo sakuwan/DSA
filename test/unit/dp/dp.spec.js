@@ -384,7 +384,7 @@ describe('DP general challenges', () => {
     expect(resultD.steps.length).toBe(15);
   });
 
-  it.only('Correctly solves the problem: Maximum sum subarray', () => {
+  it('Correctly solves the problem: Maximum sum subarray', () => {
     const { maxSubarray } = MaxSubarray;
     expect(typeof maxSubarray).toBe('function');
 
@@ -394,5 +394,18 @@ describe('DP general challenges', () => {
     const resultA = maxSubarray(testArrayA);
     expect(resultA.value).toBe(4);
     expect(resultA.indices).toStrictEqual([2, 7]);
+
+    // [1] is the longest subsequence, sum of 1
+    const testArrayB = [1];
+
+    const resultB = maxSubarray(testArrayB);
+    expect(resultB.value).toBe(1);
+    expect(resultB.indices).toStrictEqual([0, 0]);
+
+    // Empty array
+    const testArrayC = [];
+
+    const resultC = maxSubarray(testArrayC);
+    expect(resultC).toBe(null);
   });
 });
