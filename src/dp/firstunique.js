@@ -4,7 +4,7 @@
  * its index. If it does not exist, return -1.
  *
  * Runtimes:
- *  - Iterative: O(2n)
+ *  - Iteration: O(2n)
  *  - Functional: O(n^2)
 */
 

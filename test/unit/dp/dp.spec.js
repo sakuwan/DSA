@@ -6,6 +6,7 @@ import * as Median from '../../../src/dp/median';
 import * as Hanoi from '../../../src/dp/hanoi';
 import * as MaxSubarray from '../../../src/dp/maximum';
 import * as FirstUnique from '../../../src/dp/firstunique';
+import * as FourSum from '../../../src/dp/foursum';
 
 describe('DP general challenges', () => {
   it('Correctly solves the problem: Stairs', () => {
@@ -466,6 +467,47 @@ describe('DP general challenges', () => {
 
       const resultE = firstUniqueIteration(testStringE); // Index -1
       expect(resultE).toBe(-1);
+    }
+  });
+
+  it('Correctly solves the problem: Four sum', () => {
+    // 2 valid tuples
+    const testArraysetA = [[1, 2], [-2, -1], [-1, 2], [0, 2]];
+
+    // 6 valid tuples
+    const testArraysetB = [[1, -1], [1, -1], [-1, 1], [1, -1]];
+
+    // No valid tuples
+    const testArraysetC = [[1, 2], [3, 4], [5, 6], [7, 8]];
+
+    // Four sum, iterative
+    const { fourSumIteration } = FourSum;
+    expect(typeof fourSumIteration).toBe('function');
+
+    {
+      const resultA = fourSumIteration(...testArraysetA); // 2 valid
+      expect(resultA).toBe(2);
+
+      const resultB = fourSumIteration(...testArraysetB); // 2 valid
+      expect(resultB).toBe(6);
+
+      const resultC = fourSumIteration(...testArraysetC); // 0 valid
+      expect(resultC).toBe(0);
+    }
+
+    // Four sum, memoized
+    const { fourSumMemoization } = FourSum;
+    expect(typeof fourSumMemoization).toBe('function');
+
+    {
+      const resultA = fourSumMemoization(...testArraysetA); // 2 valid
+      expect(resultA).toBe(2);
+
+      const resultB = fourSumMemoization(...testArraysetB); // 2 valid
+      expect(resultB).toBe(6);
+
+      const resultC = fourSumMemoization(...testArraysetC); // 0 valid
+      expect(resultC).toBe(0);
     }
   });
 });
