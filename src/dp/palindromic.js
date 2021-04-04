@@ -47,6 +47,7 @@ export const palindromicMemoization = (S) => {
     if (n === m) return 1;
 
     if (dp[n][m] !== null) return dp[n][m];
+
     if (S[n] === S[m]) {
       dp[n][m] = 2 + ((n + 1 === m) ? 0 : longestSubsequence(n + 1, m - 1));
     } else {

@@ -11,6 +11,7 @@ import * as FizzBuzz from '../../../src/dp/fizzbuzz';
 import * as EditDistance from '../../../src/dp/editdistance';
 import * as Palindromic from '../../../src/dp/palindromic';
 import * as Increasing from '../../../src/dp/increasing';
+import * as Common from '../../../src/dp/common';
 
 describe('DP general challenges', () => {
   it('Correctly solves the problem: Stairs', () => {
@@ -755,6 +756,98 @@ describe('DP general challenges', () => {
 
       const resultE = increasingIteration(testArrayE); // 0
       expect(resultE).toBe(0);
+    }
+  });
+
+  it('Correctly solves the problem: Longest common subsequence', () => {
+    // 'ADH' = 3
+    const testStringsA = ['ABCDGH', 'AEDFHR'];
+
+    // 'ABABA' = 5
+    const testStringsB = ['ABABA', 'ABABA'];
+
+    // 'GTAB' = 4
+    const testStringsC = ['AGGTAB', 'GXTXAYB'];
+
+    // No common subsequence = 0
+    const testStringsD = ['abcd', 'efgh'];
+
+    // Empty string = 0
+    const testStringsE = ['ABABA', ''];
+
+    // Error, both values not strings = -1
+    const testStringsF = ['ABABA', null];
+
+    // Longest common subsequence, recursive
+    const { commonRecursion } = Common;
+    expect(typeof commonRecursion).toBe('function');
+
+    {
+      const resultA = commonRecursion(...testStringsA); // 3
+      expect(resultA).toBe(3);
+
+      const resultB = commonRecursion(...testStringsB); // 5
+      expect(resultB).toBe(5);
+
+      const resultC = commonRecursion(...testStringsC); // 4
+      expect(resultC).toBe(4);
+
+      const resultD = commonRecursion(...testStringsD); // 0
+      expect(resultD).toBe(0);
+
+      const resultE = commonRecursion(...testStringsE); // 0
+      expect(resultE).toBe(0);
+
+      const resultF = commonRecursion(...testStringsF); // -1
+      expect(resultF).toBe(-1);
+    }
+
+    // Longest common subsequence, recursive with memoization
+    const { commonMemoization } = Common;
+    expect(typeof commonMemoization).toBe('function');
+
+    {
+      const resultA = commonMemoization(...testStringsA); // 3
+      expect(resultA).toBe(3);
+
+      const resultB = commonMemoization(...testStringsB); // 5
+      expect(resultB).toBe(5);
+
+      const resultC = commonMemoization(...testStringsC); // 4
+      expect(resultC).toBe(4);
+
+      const resultD = commonMemoization(...testStringsD); // 0
+      expect(resultD).toBe(0);
+
+      const resultE = commonMemoization(...testStringsE); // 0
+      expect(resultE).toBe(0);
+
+      const resultF = commonMemoization(...testStringsF); // -1
+      expect(resultF).toBe(-1);
+    }
+
+    // Longest common subsequence, iterative
+    const { commonIteration } = Common;
+    expect(typeof commonIteration).toBe('function');
+
+    {
+      const resultA = commonIteration(...testStringsA); // 3
+      expect(resultA).toBe(3);
+
+      const resultB = commonIteration(...testStringsB); // 5
+      expect(resultB).toBe(5);
+
+      const resultC = commonIteration(...testStringsC); // 4
+      expect(resultC).toBe(4);
+
+      const resultD = commonIteration(...testStringsD); // 0
+      expect(resultD).toBe(0);
+
+      const resultE = commonIteration(...testStringsE); // 0
+      expect(resultE).toBe(0);
+
+      const resultF = commonIteration(...testStringsF); // -1
+      expect(resultF).toBe(-1);
     }
   });
 });
