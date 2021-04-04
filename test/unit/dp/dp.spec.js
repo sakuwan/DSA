@@ -8,6 +8,7 @@ import * as MaxSubarray from '../../../src/dp/maximum';
 import * as FirstUnique from '../../../src/dp/firstunique';
 import * as FourSum from '../../../src/dp/foursum';
 import * as FizzBuzz from '../../../src/dp/fizzbuzz';
+import * as EditDistance from '../../../src/dp/editdistance';
 
 describe('DP general challenges', () => {
   it('Correctly solves the problem: Stairs', () => {
@@ -525,5 +526,73 @@ describe('DP general challenges', () => {
     expect(result[2]).toBe('Fizz'); // 3
     expect(result[4]).toBe('Buzz'); // 5
     expect(result[14]).toBe('FizzBuzz'); // 15
+  });
+
+  it('Correctly solves the problem: Edit distance', () => {
+    // 3 substitutions, 1 insertion, 1 deletion = 8
+    const testStringsA = ['intention', 'execution'];
+
+    // 1 insertion = 1
+    const testStringsB = ['apple', 'aple'];
+
+    // 1 deletion = 1
+    const testStringsC = ['apple', 'appple'];
+
+    // 1 substitution = 2
+    const testStringsD = ['apple', 'appli'];
+
+    // Full replacement, 5 insertions = 5
+    const testStringsE = ['apple', ''];
+
+    // Error, both values not strings = -1
+    const testStringsF = ['apple', null];
+
+    // Edit distance, recursive
+    const { editDistanceRecursion } = EditDistance;
+    expect(typeof editDistanceRecursion).toBe('function');
+
+    {
+      const resultA = editDistanceRecursion(...testStringsA); // 8
+      expect(resultA).toBe(8);
+
+      const resultB = editDistanceRecursion(...testStringsB); // 1
+      expect(resultB).toBe(1);
+
+      const resultC = editDistanceRecursion(...testStringsC); // 1
+      expect(resultC).toBe(1);
+
+      const resultD = editDistanceRecursion(...testStringsD); // 2
+      expect(resultD).toBe(2);
+
+      const resultE = editDistanceRecursion(...testStringsE); // 5
+      expect(resultE).toBe(5);
+
+      const resultF = editDistanceRecursion(...testStringsF); // -1
+      expect(resultF).toBe(-1);
+    }
+
+    // Edit distance, iterative
+    const { editDistanceIteration } = EditDistance;
+    expect(typeof editDistanceIteration).toBe('function');
+
+    {
+      const resultA = editDistanceIteration(...testStringsA); // 8
+      expect(resultA).toBe(8);
+
+      const resultB = editDistanceIteration(...testStringsB); // 1
+      expect(resultB).toBe(1);
+
+      const resultC = editDistanceIteration(...testStringsC); // 1
+      expect(resultC).toBe(1);
+
+      const resultD = editDistanceIteration(...testStringsD); // 2
+      expect(resultD).toBe(2);
+
+      const resultE = editDistanceIteration(...testStringsE); // 5
+      expect(resultE).toBe(5);
+
+      const resultF = editDistanceIteration(...testStringsF); // -1
+      expect(resultF).toBe(-1);
+    }
   });
 });
