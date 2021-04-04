@@ -9,6 +9,7 @@ import * as FirstUnique from '../../../src/dp/firstunique';
 import * as FourSum from '../../../src/dp/foursum';
 import * as FizzBuzz from '../../../src/dp/fizzbuzz';
 import * as EditDistance from '../../../src/dp/editdistance';
+import * as Palindromic from '../../../src/dp/palindromic';
 
 describe('DP general challenges', () => {
   it('Correctly solves the problem: Stairs', () => {
@@ -593,6 +594,86 @@ describe('DP general challenges', () => {
 
       const resultF = editDistanceIteration(...testStringsF); // -1
       expect(resultF).toBe(-1);
+    }
+  });
+
+  it('Correctly solves the problem: Longest palindromic subsequence', () => {
+    // 7 length palindrome
+    const testStringA = 'racecar';
+
+    // 7 length palindromic subsequence = 'bababab'
+    const testStringB = 'babbabab';
+
+    // 1 length palindrome, all unique
+    const testStringC = 'abcdefg';
+
+    // 2 length palindrome, repeated
+    const testStringD = 'aa';
+
+    // Invalid palindrome, empty or null string
+    const testStringE = '';
+
+    // Longest palindromic subsequence, recursive
+    const { palindromicRecursion } = Palindromic;
+    expect(typeof palindromicRecursion).toBe('function');
+
+    {
+      const resultA = palindromicRecursion(testStringA); // 7
+      expect(resultA).toBe(7);
+
+      const resultB = palindromicRecursion(testStringB); // 7
+      expect(resultB).toBe(7);
+
+      const resultC = palindromicRecursion(testStringC); // 1
+      expect(resultC).toBe(1);
+
+      const resultD = palindromicRecursion(testStringD); // 2
+      expect(resultD).toBe(2);
+
+      const resultE = palindromicRecursion(testStringE); // 0
+      expect(resultE).toBe(0);
+    }
+
+    // Longest palindromic subsequence, memoized recursion
+    const { palindromicMemoization } = Palindromic;
+    expect(typeof palindromicMemoization).toBe('function');
+
+    {
+      const resultA = palindromicMemoization(testStringA); // 7
+      expect(resultA).toBe(7);
+
+      const resultB = palindromicMemoization(testStringB); // 7
+      expect(resultB).toBe(7);
+
+      const resultC = palindromicMemoization(testStringC); // 1
+      expect(resultC).toBe(1);
+
+      const resultD = palindromicMemoization(testStringD); // 2
+      expect(resultD).toBe(2);
+
+      const resultE = palindromicMemoization(testStringE); // 0
+      expect(resultE).toBe(0);
+    }
+
+    // Longest palindromic subsequence, iterative
+    const { palindromicIteration } = Palindromic;
+    expect(typeof palindromicIteration).toBe('function');
+
+    {
+      const resultA = palindromicIteration(testStringA); // 7
+      expect(resultA).toBe(7);
+
+      const resultB = palindromicIteration(testStringB); // 7
+      expect(resultB).toBe(7);
+
+      const resultC = palindromicIteration(testStringC); // 1
+      expect(resultC).toBe(1);
+
+      const resultD = palindromicIteration(testStringD); // 2
+      expect(resultD).toBe(2);
+
+      const resultE = palindromicIteration(testStringE); // 0
+      expect(resultE).toBe(0);
     }
   });
 });
