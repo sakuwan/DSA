@@ -10,6 +10,7 @@ import * as FourSum from '../../../src/dp/foursum';
 import * as FizzBuzz from '../../../src/dp/fizzbuzz';
 import * as EditDistance from '../../../src/dp/editdistance';
 import * as Palindromic from '../../../src/dp/palindromic';
+import * as Increasing from '../../../src/dp/increasing';
 
 describe('DP general challenges', () => {
   it('Correctly solves the problem: Stairs', () => {
@@ -673,6 +674,86 @@ describe('DP general challenges', () => {
       expect(resultD).toBe(2);
 
       const resultE = palindromicIteration(testStringE); // 0
+      expect(resultE).toBe(0);
+    }
+  });
+
+  it('Correctly solves the problem: Longest increasing subsequence', () => {
+    // [0, 2, 6, 9, 11, 15] = 6
+    const testArrayA = [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15];
+
+    // [1, 2, 3, 4, 5] = 5
+    const testArrayB = [1, 2, 3, 4, 5];
+
+    // [2, 3, 7, 101] = 4
+    const testArrayC = [10, 9, 2, 5, 3, 7, 101, 18];
+
+    // [1] = 1
+    const testArrayD = [1, 1, 1, 1, 1, 1, 1, 1];
+
+    // [] = 0
+    const testArrayE = [];
+
+    // Longest increasing subsequence, recursive
+    const { increasingRecursion } = Increasing;
+    expect(typeof increasingRecursion).toBe('function');
+
+    {
+      const resultA = increasingRecursion(testArrayA); // 6
+      expect(resultA).toBe(6);
+
+      const resultB = increasingRecursion(testArrayB); // 5
+      expect(resultB).toBe(5);
+
+      const resultC = increasingRecursion(testArrayC); // 4
+      expect(resultC).toBe(4);
+
+      const resultD = increasingRecursion(testArrayD); // 1
+      expect(resultD).toBe(1);
+
+      const resultE = increasingRecursion(testArrayE); // 0
+      expect(resultE).toBe(0);
+    }
+
+    // Longest increasing subsequence, iterative with memoization
+    const { increasingMemoization } = Increasing;
+    expect(typeof increasingMemoization).toBe('function');
+
+    {
+      const resultA = increasingMemoization(testArrayA); // 6
+      expect(resultA).toBe(6);
+
+      const resultB = increasingMemoization(testArrayB); // 5
+      expect(resultB).toBe(5);
+
+      const resultC = increasingMemoization(testArrayC); // 4
+      expect(resultC).toBe(4);
+
+      const resultD = increasingMemoization(testArrayD); // 1
+      expect(resultD).toBe(1);
+
+      const resultE = increasingMemoization(testArrayE); // 0
+      expect(resultE).toBe(0);
+    }
+
+    // Longest increasing subsequence, iterative binary search
+    const { increasingIteration } = Increasing;
+    expect(typeof increasingIteration).toBe('function');
+
+    {
+      const resultA = increasingIteration(testArrayA); // 6
+      expect(resultA).toBe(6);
+
+      const resultB = increasingIteration(testArrayB); // 5
+      expect(resultB).toBe(5);
+
+      const resultC = increasingIteration(testArrayC); // 4
+      expect(resultC).toBe(4);
+
+      const resultD = increasingIteration(testArrayD); // 1
+      expect(resultD).toBe(1);
+
+      const resultE = increasingIteration(testArrayE); // 0
       expect(resultE).toBe(0);
     }
   });
