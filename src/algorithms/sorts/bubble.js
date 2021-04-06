@@ -4,7 +4,7 @@
  * an iteration with zero swaps
  *
  * Runtime: O(n^2)
- * Space:   O(1)
+ * Space:   O(1) in place, O(n) immutable
 */
 
 // eslint-disable-next-line import/prefer-default-export
