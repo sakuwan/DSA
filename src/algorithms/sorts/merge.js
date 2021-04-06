@@ -9,7 +9,7 @@
 */
 
 /* eslint-disable no-param-reassign, no-plusplus */
-const merge = (items, length, width, index, buffer) => {
+const merge = (array, length, width, index, buffer) => {
   let left = index;
   let right = Math.min(left + width, length);
 
@@ -19,15 +19,15 @@ const merge = (items, length, width, index, buffer) => {
   let i = index;
 
   while (left < leftEnd && right < rightEnd) {
-    buffer[i++] = (items[left] <= items[right]) ? items[left++] : items[right++];
+    buffer[i++] = (array[left] <= array[right]) ? array[left++] : array[right++];
   }
 
   while (left < leftEnd) {
-    buffer[i++] = items[left++];
+    buffer[i++] = array[left++];
   }
 
   while (right < rightEnd) {
-    buffer[i++] = items[right++];
+    buffer[i++] = array[right++];
   }
 };
 /* eslint-enable no-param-reassign, no-plusplus */
