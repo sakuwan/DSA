@@ -12,6 +12,7 @@ import * as EditDistance from '../../../src/dp/editdistance';
 import * as Palindromic from '../../../src/dp/palindromic';
 import * as Increasing from '../../../src/dp/increasing';
 import * as Common from '../../../src/dp/common';
+import * as Anagram from '../../../src/dp/anagram';
 
 describe('DP general challenges', () => {
   it('Correctly solves the problem: Stairs', () => {
@@ -849,5 +850,41 @@ describe('DP general challenges', () => {
       const resultF = commonIteration(...testStringsF); // -1
       expect(resultF).toBe(-1);
     }
+  });
+
+  it('Correctly solves the problem: Anagrams of a string', () => {
+    // 1! = 1
+    const testStringA = 'a';
+
+    // 2! = 2
+    const testStringB = 'ab';
+
+    // 3! = 6
+    const testStringC = 'abc';
+
+    // 4! = 24
+    const testStringD = 'abcd';
+
+    // Zero length string, no valid anagrams
+    const testStringE = '';
+
+    // All valid anagrams, iterative heap's algorithm
+    const { anagramsIteration } = Anagram;
+    expect(typeof anagramsIteration).toBe('function');
+
+    const { length: resultA } = anagramsIteration(testStringA); // 1!
+    expect(resultA).toBe(1);
+
+    const { length: resultB } = anagramsIteration(testStringB); // 2!
+    expect(resultB).toBe(2);
+
+    const { length: resultC } = anagramsIteration(testStringC); // 3!
+    expect(resultC).toBe(6);
+
+    const { length: resultD } = anagramsIteration(testStringD); // 4!
+    expect(resultD).toBe(24);
+
+    const resultE = anagramsIteration(testStringE); // null
+    expect(resultE).toBe(null);
   });
 });

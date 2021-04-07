@@ -1,7 +1,7 @@
 /* === Maximum sum subarray ===
  *
- * Write an efficient program to find the sum of contiguous subarray within a one-dimensional array
- * of numbers that has the largest sum, with indices.
+ * Write an efficient program to find the sum of contiguous subarray within a
+ * one-dimensional array of numbers that has the largest sum, with indices.
  *
  * Runtimes:
  *  - Iteration: O(n)
