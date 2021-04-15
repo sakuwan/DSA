@@ -7,7 +7,7 @@
  * node's children.
  *
  * Runtimes:
- *  - min:    O(1)
+ *  - peek:   O(1)
  *  - insert: O(log n)
  *  - remove: O(log n)
  *  - length: O(1)
@@ -25,7 +25,7 @@ export class BinaryHeap {
     this.comparator = (a, b) => comparator(this.data[a], this.data[b]);
   }
 
-  min() {
+  peek() {
     return this.data.length > 0 ? this.data[0] : null;
   }
 
