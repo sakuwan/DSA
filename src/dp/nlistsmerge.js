@@ -11,7 +11,7 @@
 import { mergeListRecursion } from './listmerge';
 
 /* eslint-disable import/prefer-default-export, no-param-reassign */
-export default mergeNListsRecursion = (A) => {
+export const mergeNListsRecursion = (A) => {
   if (!A || !A.length) return null;
 
   while (A.length > 1) {
