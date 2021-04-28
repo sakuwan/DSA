@@ -23,3 +23,4 @@ export const mergeNListsRecursion = (A) => {
 
   return A[0];
 };
+/* eslint-enable import/prefer-default-export, no-param-reassign */
