@@ -32,10 +32,11 @@
  *
  * Runtimes:
  *  Iteration: O(n)
+ *  Functional: O(n)
 */
 
 // eslint-disable-next-line import/prefer-default-export
-export const atoi = (S) => {
+export const atoiIteration = (S) => {
   if (!S) return NaN;
 
   const MIN_INT = 2 ** 31;
@@ -74,4 +75,16 @@ export const atoi = (S) => {
   }
 
   return isNegative ? -accumulator : accumulator;
+};
+
+export const atoiFunctional = (S) => {
+  if (!S) return NaN;
+
+  const MIN_INT = -(2 ** 31);
+  const MAX_INT = 2 ** 31 - 1;
+
+  const formattedString = S.match(/^\s*([+-]?\d+)/);
+  if (formattedString === null) return NaN;
+
+  return Math.min(Math.max(+formattedString[1], MIN_INT), MAX_INT);
 };
