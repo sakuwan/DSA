@@ -4,7 +4,8 @@
  * one-dimensional array of numbers that has the largest sum, with indices.
  *
  * Runtimes:
- *  - Iteration: O(n)
+ *  - Iteration:                 O(n)
+ *  - Space-optimized iteration: O(n)
 */
 
 // eslint-disable-next-line import/prefer-default-export
@@ -31,5 +32,37 @@ export const maxSubarray = (A) => {
   return {
     value: maximumValue,
     indices: [startIndex, endIndex],
+  };
+};
+
+export const maxOptimizedSubarray = (A) => {
+  if (!A) return null;
+
+  const { length } = A;
+  if (length < 1) return null;
+  if (length === 1) return { value: A[0], indices: [0, 0] };
+
+  let peakMaximum = Number.MIN_SAFE_INTEGER;
+  const peakIndices = [0, 0];
+
+  let currentStart = 0;
+  let currentMaximum = 0;
+  for (let i = 0; i < length; i += 1) {
+    currentMaximum += A[i];
+    if (peakMaximum < currentMaximum) {
+      peakMaximum = currentMaximum;
+      peakIndices[0] = currentStart;
+      peakIndices[1] = i;
+    }
+
+    if (currentMaximum < 0) {
+      currentMaximum = 0;
+      currentStart = i + 1;
+    }
+  }
+
+  return {
+    value: peakMaximum,
+    indices: peakIndices,
   };
 };
